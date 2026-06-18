@@ -1,22 +1,29 @@
-import unittest
+from Admin.admin import Admin   # change to "from admin import Admin" if needed
 
-from Admin.admin import Admin
-from Course.course import course
+def test_init():
+    admin = Admin()
+    assert admin.course == []
 
+def test_add_course():
+    admin = Admin()
+    admin.add_course("Math")
 
-class AdminTests(unittest.TestCase):
-    def test_add_course_and_get_course(self):
-        admin = Admin()
-        math = course("Math", 101, "Algebra", 2, [])
-        science = course("Science", 102, "Biology", 1, [])
+    assert admin.course == ["Math"]
+    assert len(admin.course) == 1
 
-        self.assertEqual(admin.get_course(), [])
+def test_get_course():
+    admin = Admin()
+    admin.add_course("Science")
+    admin.add_course("English")
 
-        admin.add_course(math)
-        admin.add_course(science)
+    assert admin.get_course() == ["Science", "English"]
 
-        self.assertEqual(admin.get_course(), [math, science])
+def test_update_course():
+    admin = Admin()
 
+    admin.add_course("Math")
+    admin.add_course("Science")
 
-if __name__ == "__main__":
-    unittest.main()
+    admin.update_course(0, "Physics")
+
+    assert admin.course == ["Physics", "Science"]
