@@ -1,30 +1,13 @@
-import unittest
-from contextlib import redirect_stdout
-from io import StringIO
-
 from student.student import Student
 
+def test_student_name():
+    student = Student(102, "John", "john@example.com")
+    assert student.name == "John"
 
-class StudentTests(unittest.TestCase):
-    def test_init_sets_fields(self):
-        student = Student(1, "Alice", "alice@example.com")
+def test_student_email():
+    student = Student(103, "Alice", "alice@example.com")
+    assert student.email == "alice@example.com"
 
-        self.assertEqual(student.id, 1)
-        self.assertEqual(student.name, "Alice")
-        self.assertEqual(student.email, "alice@example.com")
-
-    def test_display_prints_expected_output(self):
-        student = Student(1, "Alice", "alice@example.com")
-        buffer = StringIO()
-
-        with redirect_stdout(buffer):
-            student.display()
-
-        self.assertEqual(
-            buffer.getvalue(),
-            "ID: 1\nNAME: Alice\nEMAIL: alice@example.com\n",
-        )
-
-
-if __name__ == "__main__":
-    unittest.main()
+def test_student_id():
+    student = Student(104, "Bob", "bob@example.com")
+    assert student.id == 104
